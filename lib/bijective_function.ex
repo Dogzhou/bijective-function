@@ -16,15 +16,15 @@ defmodule BijectiveFunction do
 
   ## Examples
 
-      iex> BijectiveFunction.encode(19158)
-      [4, 61, 0]
+      iex> BijectiveFunction.encode(12345)
+      "dnh"
 
   """
   def encode(0), do: '0'
 
-  def encode(id), do: encode(id, [])
+  def encode(id), do: encode(id, "")
   def encode(0, acc), do: acc
   def encode(id, acc) do
-    encode(div(id, @base), [rem(id, @base) | acc])
+    encode(div(id, @base), (@alphabetical_table |> String.at(rem(id, @base))) <> acc)
   end
 end

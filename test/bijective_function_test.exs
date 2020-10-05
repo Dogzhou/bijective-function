@@ -3,6 +3,6 @@ defmodule BijectiveFunctionTest do
   doctest BijectiveFunction
 
   test "greets the world" do
-    assert BijectiveFunction.encode(12345) == [3, 13, 7]
+    assert BijectiveFunction.encode(12345) == "dnh"
   end
 end
