@@ -11,6 +11,8 @@ defmodule BijectiveFunction do
   @alphabet (@lowercase_alphabet ++ @uppercase_alphabet ++ @numbers) |> List.to_string()
   @base @alphabet |> String.length()
 
+  defp a ~> b, do: :math.pow(a, b) |> round()
+
   @doc """
   Bijective encode function
 
@@ -29,5 +31,28 @@ defmodule BijectiveFunction do
 
   defp getLetterFromAlphabet(index) do
     @alphabet |> String.at(index)
+  end
+
+  @doc """
+  Bijective decode function
+
+  ## Examples
+
+      iex> BijectiveFunction.decode("dnh")
+      12345
+  """
+  def decode(string) do
+    string
+    |> String.graphemes()
+    |> Enum.reverse()
+    |> Enum.with_index()
+    |> Enum.map(&multiply_by_base(&1))
+    |> Enum.sum()
+  end
+
+  defp multiply_by_base({letter, position}) do
+    { index, _ } = :binary.match @alphabet, letter
+
+    index * (@base ~> position)
   end
 end
