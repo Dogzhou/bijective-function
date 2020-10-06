@@ -23,10 +23,11 @@ defmodule BijectiveFunction do
 
   """
   def encode(0), do: "a"
-  def encode(id), do: encode(id, "")
-  def encode(0, acc), do: acc
-  def encode(id, acc) do
-    encode(div(id, @base), getLetterFromAlphabet(rem(id, @base)) <> acc)
+  def encode(id), do: do_encode(id, "")
+
+  defp do_encode(0, acc), do: acc
+  defp do_encode(id, acc) do
+    do_encode(div(id, @base), getLetterFromAlphabet(rem(id, @base)) <> acc)
   end
 
   defp getLetterFromAlphabet(index) do
@@ -38,8 +39,8 @@ defmodule BijectiveFunction do
 
   ## Examples
 
-      iex> BijectiveFunction.decode("dnh")
-      12345
+      iex> BijectiveFunction.decode("h6K")
+      30540
   """
   def decode(string) do
     string
